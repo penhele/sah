@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { savingsApi } from '../api/savingsApi';
-import { savingsKeys } from '../queries';
+import { savingsKeys } from '../queries/saving-keys';
 
 export const useGetSavingsActivities = () => {
   return useQuery({
