@@ -1,4 +1,5 @@
 import { Saving } from "@/features/saving/types/saving";
+import { formatter } from "@/lib/format-currency";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
@@ -11,7 +12,7 @@ export const savingColumns: ColumnDef<Saving>[] = [
   {
     header: "Jumlah",
     cell: ({ row }) => {
-      return <span>{row.original.amount}</span>;
+      return <span>{formatter.format(row.original.amount)}</span>;
     },
   },
   {

@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { Progress } from "@/components/ui/progress";
 import { LucideIcon, Wallet } from "lucide-react";
 
