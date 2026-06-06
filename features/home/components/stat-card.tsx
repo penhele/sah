@@ -10,7 +10,7 @@ type Props = {
 export default function StatCard({ title, value, description }: Props) {
   return (
     <Card>
-      <CardContent className="relative">
+      <CardContent className="relative space-y-4">
         <Wallet className="absolute top-0 right-4 opacity-5" size={56} />
 
         <div className="flex flex-row justify-between">

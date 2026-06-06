@@ -26,10 +26,10 @@ export interface SavingsStats {
 const generateMockActivities = (): SavingActivity[] => {
   const activities: SavingActivity[] = [];
   const categories = ["Gaji", "Bonus", "Hadiah", "Investasi", "Lainnya"];
-  
+
   for (let i = 0; i < 20; i++) {
     const isThisMonth = i < 8;
-    const date = isThisMonth 
+    const date = isThisMonth
       ? new Date(2026, 5, Math.floor(Math.random() * 28) + 1) // June 2026
       : new Date(2026, 4, Math.floor(Math.random() * 28) + 1); // May 2026
 
@@ -43,8 +43,10 @@ const generateMockActivities = (): SavingActivity[] => {
       status: Math.random() > 0.1 ? "completed" : "pending",
     });
   }
-  
-  return activities.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return activities.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 };
 
 const mockActivities = generateMockActivities();
@@ -52,18 +54,18 @@ const mockActivities = generateMockActivities();
 const generateMonthlyGrowth = (): MonthlyGrowth[] => {
   const data: MonthlyGrowth[] = [];
   let currentBase = 10000000; // Start with 10M
-  
+
   for (let i = 6; i >= 0; i--) {
     const monthDate = subMonths(new Date(2026, 5, 1), i);
     const growth = Math.floor(Math.random() * 8000000) + 2000000;
     currentBase += growth;
-    
+
     data.push({
       month: format(monthDate, "MMM"),
       amount: currentBase,
     });
   }
-  
+
   return data;
 };
 
@@ -84,24 +86,32 @@ export const savingsApi = {
 
   getStats: async (): Promise<SavingsStats> => {
     return new Promise((resolve) => {
-      const totalBalance = mockMonthlyGrowth[mockMonthlyGrowth.length - 1].amount;
+      const totalBalance =
+        mockMonthlyGrowth[mockMonthlyGrowth.length - 1].amount;
       const totalIncomeThisMonth = mockActivities
-        .filter(a => new Date(a.date).getMonth() === 5)
+        .filter((a) => new Date(a.date).getMonth() === 5)
         .reduce((sum, a) => sum + a.amount, 0);
       const totalIncomeLastMonth = mockActivities
-        .filter(a => new Date(a.date).getMonth() === 4)
+        .filter((a) => new Date(a.date).getMonth() === 4)
         .reduce((sum, a) => sum + a.amount, 0);
-        
-      const growthPercentage = totalIncomeLastMonth === 0 
-        ? 100 
-        : ((totalIncomeThisMonth - totalIncomeLastMonth) / totalIncomeLastMonth) * 100;
 
-      setTimeout(() => resolve({
-        totalBalance,
-        totalIncomeThisMonth,
-        totalIncomeLastMonth,
-        growthPercentage,
-      }), 800);
+      const growthPercentage =
+        totalIncomeLastMonth === 0
+          ? 100
+          : ((totalIncomeThisMonth - totalIncomeLastMonth) /
+              totalIncomeLastMonth) *
+            100;
+
+      setTimeout(
+        () =>
+          resolve({
+            totalBalance,
+            totalIncomeThisMonth,
+            totalIncomeLastMonth,
+            growthPercentage,
+          }),
+        800,
+      );
     });
-  }
+  },
 };

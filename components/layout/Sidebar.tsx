@@ -1,7 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, Receipt, Wallet, Target, PiggyBank, Settings, HelpCircle, LogOut } from "lucide-react";
+import {
+  LayoutDashboard,
+  Receipt,
+  Wallet,
+  Target,
+  PiggyBank,
+  Settings,
+  HelpCircle,
+  LogOut,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
@@ -23,7 +32,9 @@ export const Sidebar = () => {
           <div className="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center">
             <span className="text-white font-bold text-xl leading-none">F</span>
           </div>
-          <span className="font-bold text-xl text-gray-900 tracking-tight">FinSet</span>
+          <span className="font-bold text-xl text-gray-900 tracking-tight">
+            FinSet
+          </span>
         </div>
 
         <nav className="mt-6 px-4 space-y-1">
@@ -39,7 +50,9 @@ export const Sidebar = () => {
                     : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
-                <item.icon className={`w-5 h-5 ${isActive ? "text-indigo-600" : "text-gray-400"}`} />
+                <item.icon
+                  className={`w-5 h-5 ${isActive ? "text-indigo-600" : "text-gray-400"}`}
+                />
                 {item.label}
               </Link>
             );

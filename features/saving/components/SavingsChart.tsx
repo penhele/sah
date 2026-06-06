@@ -1,7 +1,13 @@
 "use client";
 
 import { useGetMonthlyGrowth } from "../hooks/useSavings";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   AreaChart,
@@ -61,19 +67,25 @@ export const SavingsChart = () => {
                     <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-                <XAxis 
-                  dataKey="month" 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#9ca3af', fontSize: 12 }}
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  vertical={false}
+                  stroke="#f3f4f6"
+                />
+                <XAxis
+                  dataKey="month"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "#9ca3af", fontSize: 12 }}
                   dy={10}
                 />
-                <YAxis 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#9ca3af', fontSize: 12 }}
-                  tickFormatter={(value) => `Rp${(value / 1000000).toFixed(0)}M`}
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "#9ca3af", fontSize: 12 }}
+                  tickFormatter={(value) =>
+                    `Rp${(value / 1000000).toFixed(0)}M`
+                  }
                 />
                 <Tooltip content={<CustomTooltip />} />
                 <Area

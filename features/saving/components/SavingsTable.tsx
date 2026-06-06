@@ -40,24 +40,43 @@ export const SavingsTable = () => {
             <Table>
               <TableHeader className="bg-gray-50/50">
                 <TableRow className="border-none hover:bg-transparent">
-                  <TableHead className="w-[100px] text-gray-500 font-medium">ID</TableHead>
-                  <TableHead className="text-gray-500 font-medium">Tanggal</TableHead>
-                  <TableHead className="text-gray-500 font-medium">Kategori</TableHead>
-                  <TableHead className="text-gray-500 font-medium">Jumlah</TableHead>
-                  <TableHead className="text-right text-gray-500 font-medium">Status</TableHead>
+                  <TableHead className="w-[100px] text-gray-500 font-medium">
+                    ID
+                  </TableHead>
+                  <TableHead className="text-gray-500 font-medium">
+                    Tanggal
+                  </TableHead>
+                  <TableHead className="text-gray-500 font-medium">
+                    Kategori
+                  </TableHead>
+                  <TableHead className="text-gray-500 font-medium">
+                    Jumlah
+                  </TableHead>
+                  <TableHead className="text-right text-gray-500 font-medium">
+                    Status
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {activities?.slice(0, 5).map((activity) => (
-                  <TableRow key={activity.id} className="border-b border-gray-50 hover:bg-indigo-50/30 transition-colors">
-                    <TableCell className="font-medium text-gray-900">{activity.id}</TableCell>
+                  <TableRow
+                    key={activity.id}
+                    className="border-b border-gray-50 hover:bg-indigo-50/30 transition-colors"
+                  >
+                    <TableCell className="font-medium text-gray-900">
+                      {activity.id}
+                    </TableCell>
                     <TableCell className="text-gray-500">
-                      {format(new Date(activity.date), "dd MMM yyyy", { locale: id })}
+                      {format(new Date(activity.date), "dd MMM yyyy", {
+                        locale: id,
+                      })}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <span className="h-2 w-2 rounded-full bg-indigo-400" />
-                        <span className="text-gray-700">{activity.category}</span>
+                        <span className="text-gray-700">
+                          {activity.category}
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell className="font-semibold text-gray-900">
@@ -69,14 +88,20 @@ export const SavingsTable = () => {
                     </TableCell>
                     <TableCell className="text-right">
                       <Badge
-                        variant={activity.status === "completed" ? "default" : "secondary"}
+                        variant={
+                          activity.status === "completed"
+                            ? "default"
+                            : "secondary"
+                        }
                         className={
                           activity.status === "completed"
                             ? "bg-green-100 text-green-700 hover:bg-green-200 border-none px-3 py-1"
                             : "bg-orange-100 text-orange-700 hover:bg-orange-200 border-none px-3 py-1"
                         }
                       >
-                        {activity.status === "completed" ? "Selesai" : "Tertunda"}
+                        {activity.status === "completed"
+                          ? "Selesai"
+                          : "Tertunda"}
                       </Badge>
                     </TableCell>
                   </TableRow>

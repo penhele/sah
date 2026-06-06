@@ -3,6 +3,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useSavings } from "@/features/saving/hooks/use-savings";
 import StatCard from "./stat-card";
+import { DataTable } from "@/components/data-table";
+import { savingColumns } from "./saving-columns";
 
 export default function HomePage() {
   const { data: savings } = useSavings();
@@ -31,7 +33,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="px-4">
+    <div className="px-4 space-y-4">
       <div className="grid grid-cols-3 gap-4">
         {items.map((item, index) => (
           <StatCard
@@ -42,6 +44,8 @@ export default function HomePage() {
           />
         ))}
       </div>
+
+      <DataTable columns={savingColumns} data={savings || []} />
     </div>
   );
 }
