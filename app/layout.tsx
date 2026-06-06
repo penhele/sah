@@ -46,7 +46,7 @@ export default function RootLayout({
           <TooltipProvider>
             <QueryProvider>
               <AppSidebar />
-              <main>
+              <main className="w-full">
                 <SidebarTrigger />
                 {children}
               </main>
