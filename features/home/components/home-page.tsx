@@ -5,6 +5,7 @@ import { useSavings } from "@/features/saving/hooks/use-savings";
 import StatCard from "./stat-card";
 import { DataTable } from "@/components/data-table";
 import { savingColumns } from "./saving-columns";
+import { Target, TrendingUp, Wallet } from "lucide-react";
 
 export default function HomePage() {
   const { data: savings } = useSavings();
@@ -14,21 +15,31 @@ export default function HomePage() {
       0,
     ) ?? 0;
 
+  const formatter = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  });
+
   const items = [
     {
       title: "Total Tabungan",
-      value: total,
+      value: formatter.format(total),
       description: "Akumulasi seluruh tabungan pernikahan",
+      Icon: Wallet,
     },
     {
-      title: "Total Tabungan",
-      value: total,
-      description: "Akumulasi seluruh tabungan pernikahan",
+      title: "Pemasukan Bulan Ini",
+      value: formatter.format(total),
+      description: "VS bulan lalu",
+      Icon: TrendingUp,
     },
     {
-      title: "Total Tabungan",
-      value: total,
+      title: "Target Menabung",
+      value: 20,
       description: "Akumulasi seluruh tabungan pernikahan",
+      Icon: Target,
+      isProgress: true,
     },
   ];
 
@@ -41,6 +52,8 @@ export default function HomePage() {
             title={item.title}
             description={item.description}
             value={item.value}
+            Icon={item.Icon}
+            isProgress={item.isProgress}
           />
         ))}
       </div>
