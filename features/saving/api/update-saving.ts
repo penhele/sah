@@ -1,5 +1,5 @@
-import { UpdateSavingPayload } from "@/features/types/update-saving-payload";
 import { api } from "@/lib/api/axios";
+import { UpdateSavingPayload } from "../types/update-saving-payload";
 
 export const updateSaving = async (
   id: string | number,
