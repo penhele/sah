@@ -1,15 +1,21 @@
 "use client";
 
 import { DataTable } from "@/components/data-table";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 import { useSavings } from "@/features/saving/hooks/use-savings";
 import { formatter } from "@/lib/format-currency";
-import { Check, Target, TrendingUp, Wallet } from "lucide-react";
+import { Target, TrendingUp, Wallet } from "lucide-react";
+import CardChart from "./chart-card";
 import { savingColumns } from "./saving-columns";
 import StatCard from "./stat-card";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function HomePage() {
-  const { data: savings } = useSavings();
+  const { data: savings = [] } = useSavings();
   const total =
     savings?.reduce(
       (acumulator, saving) => acumulator + Number(saving.amount),
@@ -52,7 +58,6 @@ export default function HomePage() {
           />
         ))}
       </div>
-
       <div className="grid grid-cols-3 gap-4">
         <Card>
           <CardHeader>
@@ -63,14 +68,14 @@ export default function HomePage() {
             <div className="border p-2 rounded-lg bg-muted flex flex-row items-center">
               <div className="flex flex-col space-y-1">
                 <span>Stephen Helenus</span>
-                <span className="text-xl font-bold">
+                <span className="text-lg font-bold">
                   {formatter.format(54000000)}
                 </span>
               </div>
             </div>
             <div className="flex flex-col space-y-1 border p-2 rounded-lg bg-muted">
               <span>Ivana Novelia</span>
-              <span className="text-xl font-bold">
+              <span className="text-lg font-bold">
                 {formatter.format(54000000)}
               </span>
             </div>
@@ -84,6 +89,8 @@ export default function HomePage() {
           className="col-span-2"
         />
       </div>
+
+      <CardChart />
     </div>
   );
 }
