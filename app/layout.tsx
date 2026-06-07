@@ -43,18 +43,12 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col bg-gray-50/30">
-        <SidebarProvider>
-          <TooltipProvider>
-            <QueryProvider>
-              <AppSidebar />
-              <main className="w-full">
-                <SidebarTrigger />
-                {children}
-              </main>
-              <Toaster />
-            </QueryProvider>
-          </TooltipProvider>
-        </SidebarProvider>
+        <TooltipProvider>
+          <QueryProvider>
+            <main>{children}</main>
+            <Toaster />
+          </QueryProvider>
+        </TooltipProvider>
       </body>
     </html>
   );
