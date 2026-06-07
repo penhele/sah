@@ -26,6 +26,8 @@ export default function CalendarField({
     ? parseISO(field.state.value)
     : undefined;
 
+  console.log(field.state);
+
   return (
     <Field className="space-y-between-items-xs">
       <div className="flex justify-between items-center">

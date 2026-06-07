@@ -26,7 +26,7 @@ export const savingColumns: ColumnDef<Saving>[] = [
     cell: ({ row }) => {
       return (
         <span>
-          {format(row.original.created_at, "EEEE, dd MMMM yyyy", {
+          {format(row.original.date, "EEEE, dd MMMM yyyy", {
             locale: id,
           })}
         </span>
