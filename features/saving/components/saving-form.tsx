@@ -30,9 +30,15 @@ export default function SavingForm({
 
   return (
     <form.AppForm>
-      <form className={cn("space-y-4", className)}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          form.handleSubmit();
+        }}
+        className={cn("space-y-4", className)}
+      >
         <form.AppField name="userId">
-          {(field) => <field.TextField label="Nama" />}
+          {(field) => <field.TextField label="Nama" readonly />}
         </form.AppField>
 
         <form.AppField name="amount">

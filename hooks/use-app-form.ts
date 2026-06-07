@@ -1,6 +1,6 @@
 "use client";
 
-import SubmitButton from "@/components/submin-button";
+import SubmitButton from "@/components/submit-button";
 import TextField from "@/components/text-field";
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 

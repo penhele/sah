@@ -1,4 +1,4 @@
 export interface CreateSavingPayload {
-  amount: number;
+  amount: string;
   userId: string;
 }

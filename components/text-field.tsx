@@ -6,11 +6,18 @@ type Props = {
   label: string;
   placeholder?: string;
   type?: "text" | "number";
+  readonly?: boolean;
 };
 
-export default function TextField({ label, type, placeholder }: Props) {
+export default function TextField({
+  label,
+  type,
+  placeholder,
+  readonly,
+}: Props) {
   const field = useFieldContext<string>();
 
+  console.log(field.state.value);
   return (
     <Field>
       <FieldLabel>{label}</FieldLabel>
@@ -20,10 +27,17 @@ export default function TextField({ label, type, placeholder }: Props) {
         <InputGroupInput
           value={field.state.value}
           onChange={(e) => {
-            field.handleChange(e.target.value);
+            if (type === "number") {
+              const rawValue = e.target.value.replace(/\D/g, "");
+
+              field.handleChange(rawValue);
+            } else {
+              field.handleChange(e.target.value);
+            }
           }}
-          type={type ? "text" : type}
+          type={type}
           placeholder={placeholder}
+          readOnly={readonly}
         />
       </InputGroup>
     </Field>

@@ -9,6 +9,8 @@ import CreateSavingForm from "./create-saving-form";
 export default function SavingPage() {
   const { data: savings = [] } = useSavings();
 
+  console.log(savings);
+
   return (
     <div className="px-4 grid grid-cols-3 gap-4">
       <CreateSavingForm />
