@@ -11,7 +11,10 @@ type Props = {
   className?: string;
 };
 
-export default function CreateSavingForm({ className }: Props) {
+export default function CreateSavingForm({
+  className,
+  showHeader = true,
+}: Props) {
   const { data: me, isLoading } = useMe();
 
   const queryClient = useQueryClient();
