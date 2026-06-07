@@ -2,6 +2,7 @@ import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
 import { createSavingSchema, SavingFormValues } from "../schemas/saving.schema";
 import { revalidateLogic } from "@tanstack/react-form";
+import { SheetContent } from "@/components/ui/sheet";
 
 type Props = {
   className?: string;
@@ -26,7 +27,7 @@ export default function SavingForm({
       modeAfterSubmission: "blur",
     }),
     onSubmit: async ({ value }) => {
-      onSubmit(value);
+      await onSubmit(value);
     },
   });
 

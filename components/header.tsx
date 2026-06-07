@@ -10,11 +10,9 @@ export default function Header() {
       <div className="">
         <h1 className="font-semibold text-xl">Sah</h1>
         <p className="text-sm text-muted-foreground">
-          Website pencatatan keuangan 
+          Website pencatatan keuangan
         </p>
       </div>
-
-
 
       <div className="flex flex-row space-x-4 items-center justify-center">
         <div className="aspect-square rounded-full h-full flex items-center justify-center bg-indigo-200">

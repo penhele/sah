@@ -17,12 +17,15 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import CreateSavingSheet from "@/features/saving/components/create-saving-sheet";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   className?: string;
   title: string;
+  actions?: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
@@ -30,6 +33,7 @@ export function DataTable<TData, TValue>({
   data,
   className,
   title,
+  actions,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -40,7 +44,11 @@ export function DataTable<TData, TValue>({
   return (
     <Card className={cn("overflow-hidden rounded-md", className)}>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <div className="flex flex-row items-center">
+          <CardTitle>{title}</CardTitle>
+
+          {actions && <div className="ml-auto">{actions}</div>}
+        </div>
       </CardHeader>
 
       <CardContent>

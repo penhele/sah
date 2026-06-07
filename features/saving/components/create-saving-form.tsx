@@ -11,10 +11,7 @@ type Props = {
   className?: string;
 };
 
-export default function CreateSavingForm({
-  className,
-  showHeader = true,
-}: Props) {
+export default function CreateSavingForm({ className }: Props) {
   const { data: me, isLoading } = useMe();
 
   const queryClient = useQueryClient();
@@ -22,36 +19,34 @@ export default function CreateSavingForm({
   const { mutateAsync } = useMutation({
     mutationFn: (data: CreateSavingPayload) => addSaving(data),
     onMutate(variables, context) {
-      const toastId = toast.loading("Creating...");
+      const toastId = toast.loading("Creating...", { position: "top-center" });
       return { toastId };
     },
     onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil", { id: onMutateResult?.toastId });
+      toast.success("Berhasil", {
+        id: onMutateResult?.toastId,
+        position: "top-center",
+      });
       queryClient.invalidateQueries({ queryKey: savingsKeys.all });
     },
     onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal", { id: onMutateResult?.toastId });
+      toast.error("Gagal", {
+        id: onMutateResult?.toastId,
+        position: "top-center",
+      });
     },
   });
 
   return (
-    <Card className="h-fit">
-      <CardHeader>
-        <CardTitle>Input Tabungan</CardTitle>
-      </CardHeader>
-
-      <CardContent>
-        <SavingForm
-          defaultValues={{
-            userId: me?.id ?? "",
-            amount: "",
-            date: new Date().toISOString(),
-          }}
-          onSubmit={async (value) => await mutateAsync(value)}
-          className={className}
-          isLoading={isLoading}
-        />
-      </CardContent>
-    </Card>
+    <SavingForm
+      defaultValues={{
+        userId: me?.id ?? "",
+        amount: "",
+        date: new Date().toISOString(),
+      }}
+      onSubmit={async (value) => await mutateAsync(value)}
+      className={className}
+      isLoading={isLoading}
+    />
   );
 }
