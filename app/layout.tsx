@@ -6,6 +6,7 @@ import { QueryProvider } from "@/components/providers/QueryProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -50,6 +51,7 @@ export default function RootLayout({
                 <SidebarTrigger />
                 {children}
               </main>
+              <Toaster />
             </QueryProvider>
           </TooltipProvider>
         </SidebarProvider>

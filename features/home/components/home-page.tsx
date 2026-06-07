@@ -1,12 +1,7 @@
 "use client";
 
 import { DataTable } from "@/components/data-table";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSavings } from "@/features/saving/hooks/use-savings";
 import { formatter } from "@/lib/format-currency";
 import { Target, TrendingUp, Wallet } from "lucide-react";
