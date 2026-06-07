@@ -18,12 +18,16 @@ export default function CreateSavingForm({ className }: Props) {
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: CreateSavingPayload) => addSaving(data),
+    onMutate(variables, context) {
+      const toastId = toast.loading("Creating...");
+      return { toastId };
+    },
     onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil");
+      toast.success("Berhasil", { id: onMutateResult?.toastId });
       queryClient.invalidateQueries({ queryKey: savingsKeys.all });
     },
     onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal");
+      toast.error("Gagal", { id: onMutateResult?.toastId });
     },
   });
 
@@ -38,7 +42,7 @@ export default function CreateSavingForm({ className }: Props) {
           defaultValues={{
             userId: me?.id ?? "",
             amount: "",
-            date: "",
+            date: new Date().toISOString(),
           }}
           onSubmit={async (value) => await mutateAsync(value)}
           className={className}
