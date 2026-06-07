@@ -51,6 +51,7 @@ export default function SavingForm({
               label="Nominal"
               isDisabled={isLoading}
               type="number"
+              placeholder="1.000.000"
             />
           )}
         </form.AppField>
