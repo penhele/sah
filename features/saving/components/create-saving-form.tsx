@@ -38,7 +38,7 @@ export default function CreateSavingForm({ className }: Props) {
           defaultValues={{
             userId: me?.id ?? "",
             amount: "",
-            date: "2026-06-07T05:53:34.329Z",
+            date: "",
           }}
           onSubmit={async (value) => await mutateAsync(value)}
           className={className}

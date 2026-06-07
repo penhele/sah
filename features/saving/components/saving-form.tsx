@@ -55,6 +55,10 @@ export default function SavingForm({
           )}
         </form.AppField>
 
+        <form.AppField name="date">
+          {(field) => <field.CalendarField label="Date" />}
+        </form.AppField>
+
         <form.SubmitButton label="Saving" className="w-full" />
       </form>
     </form.AppForm>
