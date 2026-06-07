@@ -11,6 +11,22 @@ export default function StatGrid() {
       0,
     ) ?? 0;
 
+  const currentDate = new Date();
+
+  const monthlyTotal =
+    savings?.reduce((accumulator, saving) => {
+      const savingDate = new Date(saving.date);
+
+      const isCurrentMonth =
+        savingDate.getMonth() === currentDate.getMonth() &&
+        savingDate.getFullYear() === currentDate.getFullYear();
+
+      return isCurrentMonth ? accumulator + Number(saving.amount) : accumulator;
+    }, 0) ?? 0;
+
+  const TARGET_SAVING = 40_000_000;
+  const savingProgress = Math.min((total / TARGET_SAVING) * 100, 100);
+
   const items = [
     {
       title: "Total Tabungan",
@@ -20,14 +36,14 @@ export default function StatGrid() {
     },
     {
       title: "Pemasukan Bulan Ini",
-      value: formatter.format(total),
+      value: formatter.format(monthlyTotal),
       description: "VS bulan lalu",
       Icon: TrendingUp,
     },
     {
       title: "Target Menabung",
-      value: 20,
-      description: "Akumulasi seluruh tabungan pernikahan",
+      value: `${savingProgress.toFixed(2)}`,
+      description: `${formatter.format(total)} dari ${formatter.format(TARGET_SAVING)}`,
       Icon: Target,
       isProgress: true,
     },

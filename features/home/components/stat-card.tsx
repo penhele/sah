@@ -32,7 +32,9 @@ export default function StatCard({
         </div>
 
         <div className="flex flex-col space-y-1">
-          <span className="text-2xl font-bold">{value}</span>
+          <span className="text-2xl font-bold">
+            {value} {isProgress && "%"}
+          </span>
 
           {isProgress ? (
             <Progress value={Number(value)} className="h-2 flex items-end" />
