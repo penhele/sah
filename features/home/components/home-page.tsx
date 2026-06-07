@@ -20,7 +20,7 @@ export default function HomePage() {
 
       <div className="grid grid-cols-3 gap-4">
         <DataTable
-          title={`Pemasukan ${me?.name.substring(0, me.name.indexOf(" "))}`}
+          title={`Pemasukan ${me?.name}`}
           data={mySaving}
           columns={columnsForMe}
         />
