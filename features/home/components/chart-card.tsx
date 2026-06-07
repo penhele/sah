@@ -1,9 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useSavings } from "@/features/saving/hooks/use-savings";
 import { formatter } from "@/lib/format-currency";

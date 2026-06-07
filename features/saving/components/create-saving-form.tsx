@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function CreateSavingForm({ className }: Props) {
-  const { data: me } = useMe();
+  const { data: me, isLoading } = useMe();
 
   const queryClient = useQueryClient();
 
@@ -28,7 +28,7 @@ export default function CreateSavingForm({ className }: Props) {
   });
 
   return (
-    <Card className="">
+    <Card className="h-fit">
       <CardHeader>
         <CardTitle>Input Tabungan</CardTitle>
       </CardHeader>
@@ -42,6 +42,7 @@ export default function CreateSavingForm({ className }: Props) {
           }}
           onSubmit={async (value) => await mutateAsync(value)}
           className={className}
+          isLoading={isLoading}
         />
       </CardContent>
     </Card>

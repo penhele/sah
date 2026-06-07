@@ -7,12 +7,14 @@ type Props = {
   className?: string;
   defaultValues: SavingFormValues;
   onSubmit: (values: SavingFormValues) => void;
+  isLoading: boolean;
 };
 
 export default function SavingForm({
   className,
   defaultValues,
   onSubmit,
+  isLoading,
 }: Props) {
   const form = useAppForm({
     defaultValues: defaultValues,
@@ -38,11 +40,19 @@ export default function SavingForm({
         className={cn("space-y-4", className)}
       >
         <form.AppField name="userId">
-          {(field) => <field.TextField label="Nama" readonly />}
+          {(field) => (
+            <field.TextField label="Nama" isDisabled={isLoading} readonly />
+          )}
         </form.AppField>
 
         <form.AppField name="amount">
-          {(field) => <field.TextField label="Nominal" type="number" />}
+          {(field) => (
+            <field.TextField
+              label="Nominal"
+              isDisabled={isLoading}
+              type="number"
+            />
+          )}
         </form.AppField>
 
         <form.SubmitButton label="Saving" className="w-full" />

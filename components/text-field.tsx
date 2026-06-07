@@ -7,6 +7,7 @@ type Props = {
   placeholder?: string;
   type?: "text" | "number";
   readonly?: boolean;
+  isDisabled?: boolean;
 };
 
 export default function TextField({
@@ -14,6 +15,7 @@ export default function TextField({
   type,
   placeholder,
   readonly,
+  isDisabled,
 }: Props) {
   const field = useFieldContext<string>();
 
@@ -38,6 +40,7 @@ export default function TextField({
           type={type}
           placeholder={placeholder}
           readOnly={readonly}
+          disabled={isDisabled}
         />
       </InputGroup>
     </Field>
