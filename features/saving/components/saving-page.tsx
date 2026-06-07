@@ -1,22 +1,21 @@
 "use client";
 
 import { DataTable } from "@/components/data-table";
-import { savingColumns } from "@/features/home/components/saving-columns";
+import { getSavingColumns } from "@/features/home/components/saving-columns";
 import { useSavings } from "../hooks/use-savings";
-import SavingForm from "./saving-form";
 import CreateSavingForm from "./create-saving-form";
 
 export default function SavingPage() {
   const { data: savings = [] } = useSavings();
 
-  console.log(savings);
+  const columnsForAll = getSavingColumns();
 
   return (
-    <div className="px-4 grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-4">
       <CreateSavingForm />
 
       <DataTable
-        columns={savingColumns}
+        columns={columnsForAll}
         data={savings}
         title="Pemasukan"
         className="col-span-2"

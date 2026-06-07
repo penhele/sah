@@ -3,7 +3,7 @@ import SavingForm from "./saving-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addSaving } from "../api/add-saving";
 import { toast } from "sonner";
-import { useMe } from "@/features/user/hoos/use-me";
+import { useMe } from "@/features/user/hooks/use-me";
 import { CreateSavingPayload } from "../types/create-saving-payload";
 import { savingsKeys } from "../queries/saving-keys";
 

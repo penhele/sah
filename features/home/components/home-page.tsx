@@ -1,21 +1,31 @@
 "use client";
 
 import { DataTable } from "@/components/data-table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSavings } from "@/features/saving/hooks/use-savings";
+import { useMe } from "@/features/user/hooks/use-me";
 import { formatter } from "@/lib/format-currency";
 import { Target, TrendingUp, Wallet } from "lucide-react";
+import { useMemo } from "react";
 import CardChart from "./chart-card";
-import { savingColumns } from "./saving-columns";
+import { getSavingColumns } from "./saving-columns";
 import StatCard from "./stat-card";
 
 export default function HomePage() {
   const { data: savings = [] } = useSavings();
+  const { data: me } = useMe();
+
+  const mySaving = useMemo(() => {
+    return savings.filter((item) => item.user.id === me?.id);
+  }, [savings]);
+
   const total =
     savings?.reduce(
       (acumulator, saving) => acumulator + Number(saving.amount),
       0,
     ) ?? 0;
+
+  const columnsForMe = getSavingColumns({ excludeFields: ["id", "nama"] });
+  const columnsForAll = getSavingColumns();
 
   const items = [
     {
@@ -40,7 +50,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="px-4 space-y-4">
+    <div className=" space-y-4">
       <div className="grid grid-cols-3 gap-4">
         {items.map((item, index) => (
           <StatCard
@@ -54,7 +64,7 @@ export default function HomePage() {
         ))}
       </div>
       <div className="grid grid-cols-3 gap-4">
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle>Aktivitas</CardTitle>
           </CardHeader>
@@ -75,10 +85,16 @@ export default function HomePage() {
               </span>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
 
         <DataTable
-          columns={savingColumns}
+          title="Pemasukan Stephen"
+          data={mySaving}
+          columns={columnsForMe}
+        />
+
+        <DataTable
+          columns={columnsForAll}
           data={savings || []}
           title="Pemasukan"
           className="col-span-2"
