@@ -3,12 +3,13 @@ import { Button } from "./ui/button";
 import { useFormContext } from "@/hooks/use-app-form";
 import { Spinner } from "./ui/spinner";
 
-type Props = {
+interface Props {
   label: string;
   className?: string;
-};
+  loading?: boolean;
+}
 
-export default function SubmitButton({ label, className }: Props) {
+export default function SubmitButton({ label, className, loading }: Props) {
   const form = useFormContext();
 
   return (
@@ -20,7 +21,7 @@ export default function SubmitButton({ label, className }: Props) {
     >
       {({ isSubmitting, canSubmit }) => (
         <Button type="submit" className={cn(className)}>
-          {isSubmitting ? <Spinner /> : label}
+          {isSubmitting || loading ? <Spinner /> : label}
         </Button>
       )}
     </form.Subscribe>

@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { Toaster } from "@/components/ui/sonner";
+import { GooeyToaster } from "@/components/ui/goey-toaster";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -46,7 +47,7 @@ export default function RootLayout({
         <TooltipProvider>
           <QueryProvider>
             <main>{children}</main>
-            <Toaster />
+            <GooeyToaster position="top-center" />
           </QueryProvider>
         </TooltipProvider>
       </body>

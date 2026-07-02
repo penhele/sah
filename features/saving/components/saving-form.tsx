@@ -8,14 +8,16 @@ type Props = {
   className?: string;
   defaultValues: SavingFormValues;
   onSubmit: (values: SavingFormValues) => void;
-  isLoading: boolean;
+  isDisabled: boolean;
+  loading?: boolean;
 };
 
 export default function SavingForm({
   className,
   defaultValues,
   onSubmit,
-  isLoading,
+  isDisabled,
+  loading,
 }: Props) {
   const form = useAppForm({
     defaultValues: defaultValues,
@@ -42,7 +44,7 @@ export default function SavingForm({
       >
         <form.AppField name="userId">
           {(field) => (
-            <field.TextField label="Nama" isDisabled={isLoading} readonly />
+            <field.TextField label="Nama" isDisabled={isDisabled} readonly />
           )}
         </form.AppField>
 
@@ -50,7 +52,7 @@ export default function SavingForm({
           {(field) => (
             <field.TextField
               label="Nominal"
-              isDisabled={isLoading}
+              isDisabled={isDisabled}
               type="number"
               placeholder="1.000.000"
             />
@@ -61,7 +63,11 @@ export default function SavingForm({
           {(field) => <field.CalendarField label="Date" />}
         </form.AppField>
 
-        <form.SubmitButton label="Saving" className="w-full" />
+        <form.SubmitButton
+          label="Saving"
+          className="w-full"
+          loading={loading}
+        />
       </form>
     </form.AppForm>
   );

@@ -1,41 +1,33 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SavingForm from "./saving-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addSaving } from "../api/add-saving";
-import { toast } from "sonner";
 import { useMe } from "@/features/user/hooks/use-me";
-import { CreateSavingPayload } from "../types/create-saving-payload";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { gooeyToast } from "goey-toast";
+import { addSaving } from "../api/add-saving";
 import { savingsKeys } from "../queries/saving-keys";
+import { CreateSavingPayload } from "../types/create-saving-payload";
+import SavingForm from "./saving-form";
 
-type Props = {
+interface Props {
   className?: string;
-};
+}
 
 export default function CreateSavingForm({ className }: Props) {
   const { data: me, isLoading } = useMe();
-
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: CreateSavingPayload) => addSaving(data),
-    onMutate(variables, context) {
-      const toastId = toast.loading("Creating...", { position: "top-center" });
-      return { toastId };
-    },
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil", {
-        id: onMutateResult?.toastId,
-        position: "top-center",
-      });
-      queryClient.invalidateQueries({ queryKey: savingsKeys.all });
-    },
-    onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal", {
-        id: onMutateResult?.toastId,
-        position: "top-center",
-      });
-    },
   });
+
+  const handleSubmit = (value: CreateSavingPayload) => {
+    gooeyToast.promise(mutateAsync(value), {
+      loading: "Creating...",
+      success: () => {
+        queryClient.invalidateQueries({ queryKey: savingsKeys.all });
+        return "Berhasil";
+      },
+      error: "Gagal",
+    });
+  };
 
   return (
     <SavingForm
@@ -44,9 +36,10 @@ export default function CreateSavingForm({ className }: Props) {
         amount: "",
         date: new Date().toISOString(),
       }}
-      onSubmit={async (value) => await mutateAsync(value)}
+      onSubmit={handleSubmit}
       className={className}
-      isLoading={isLoading}
+      isDisabled={isLoading}
+      loading={isPending}
     />
   );
 }
