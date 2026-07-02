@@ -5,9 +5,11 @@ import { getSavingColumns } from "@/features/home/components/saving-columns";
 import { useMySavings } from "../hooks/use-my-savings";
 import CreateSavingSheet from "./create-saving-sheet";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useMe } from "@/features/user/hooks/use-me";
 
 export default function SavingPage() {
-  const { data: mySaving = [], me } = useMySavings();
+  const { data: me } = useMe();
+  const { data: mySavings = [] } = useMySavings();
 
   const columnsForAll = getSavingColumns();
 
@@ -18,14 +20,12 @@ export default function SavingPage() {
           <CardTitle>Total Pemasukan {me?.name}</CardTitle>
         </CardHeader>
 
-        <CardContent>
-          
-        </CardContent>
+        <CardContent></CardContent>
       </Card>
 
       <DataTable
         columns={columnsForAll}
-        data={mySaving}
+        data={mySavings}
         title="Pemasukan"
         className="col-span-2"
         actions={<CreateSavingSheet />}

@@ -5,7 +5,7 @@ import { id } from "date-fns/locale";
 import { ColumnDef } from "@tanstack/react-table";
 
 interface GetColumnsProps {
-  excludeFields?: ("id" | "jumlah" | "nama" | "tanggal")[];
+  excludeFields?: ("jumlah" | "nama" | "tanggal")[];
 }
 
 export const getSavingColumns = ({
@@ -13,9 +13,17 @@ export const getSavingColumns = ({
 }: GetColumnsProps = {}): ColumnDef<Saving>[] => {
   const allColumns: (ColumnDef<Saving> & { id: string })[] = [
     {
-      id: "id", // Kita beri ID eksplisit untuk mempermudah filtering
-      accessorKey: "id",
-      header: "ID",
+      id: "tanggal",
+      header: "Tanggal",
+      cell: ({ row }) => {
+        return (
+          <span>
+            {format(new Date(row.original.date), "EEEE, dd MMMM yyyy", {
+              locale: id,
+            })}
+          </span>
+        );
+      },
     },
     {
       id: "jumlah",
@@ -29,19 +37,6 @@ export const getSavingColumns = ({
       header: "Nama",
       cell: ({ row }) => {
         return <span>{row.original.user?.name}</span>;
-      },
-    },
-    {
-      id: "tanggal",
-      header: "Tanggal",
-      cell: ({ row }) => {
-        return (
-          <span>
-            {format(new Date(row.original.date), "EEEE, dd MMMM yyyy", {
-              locale: id,
-            })}
-          </span>
-        );
       },
     },
   ];
