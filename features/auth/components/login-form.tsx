@@ -49,7 +49,7 @@ export default function LoginForm() {
       >
         <form.AppField name="email">
           {(field) => (
-            <field.TextField
+            <field.InputField
               label="Email"
               type="email"
               placeholder="john@doe.com"
@@ -60,7 +60,7 @@ export default function LoginForm() {
 
         <form.AppField name="password">
           {(field) => (
-            <field.TextField
+            <field.InputField
               label="Password"
               type="password"
               placeholder="∗∗∗∗∗∗∗∗"

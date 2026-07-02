@@ -1,11 +1,11 @@
 import { useFieldContext } from "@/hooks/use-app-form";
-import { Field, FieldLabel } from "./ui/field";
+import { Field, FieldLabel } from "../ui/field";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "./ui/input-group";
+} from "../ui/input-group";
 import { Eye, EyeOff, LucideIcon, Mail } from "lucide-react";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ type Props = {
   IconAddon?: LucideIcon;
 };
 
-export default function TextField({
+export default function InputField({
   label,
   type,
   placeholder,

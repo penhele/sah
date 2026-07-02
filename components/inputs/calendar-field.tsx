@@ -1,19 +1,19 @@
 import React from "react";
-import { Calendar } from "./ui/calendar";
+import { Calendar } from "../ui/calendar";
 import { useFieldContext } from "@/hooks/use-app-form";
-import { Field, FieldLabel } from "./ui/field";
-import { Button } from "./ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Field, FieldLabel } from "../ui/field";
+import { Button } from "../ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { parseISO } from "date-fns";
 import { cn } from "@/lib/utils";
 import { CalendarFold } from "lucide-react";
 import { formatDate } from "@/lib/format/date";
 
-type Props = {
+interface Props {
   label: string;
   placeholder?: string;
   isDisabled?: boolean;
-};
+}
 
 export default function CalendarField({
   label,

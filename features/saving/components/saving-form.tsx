@@ -3,14 +3,15 @@ import { cn } from "@/lib/utils";
 import { createSavingSchema, SavingFormValues } from "../schemas/saving.schema";
 import { revalidateLogic } from "@tanstack/react-form";
 import { SheetContent } from "@/components/ui/sheet";
+import { useMe } from "@/features/user/hooks/use-me";
 
-type Props = {
+interface Props {
   className?: string;
   defaultValues: SavingFormValues;
   onSubmit: (values: SavingFormValues) => void;
   isDisabled: boolean;
   loading?: boolean;
-};
+}
 
 export default function SavingForm({
   className,
@@ -33,6 +34,8 @@ export default function SavingForm({
     },
   });
 
+  const { data: me } = useMe();
+
   return (
     <form.AppForm>
       <form
@@ -42,15 +45,22 @@ export default function SavingForm({
         }}
         className={cn("space-y-4", className)}
       >
+
         <form.AppField name="userId">
-          {(field) => (
-            <field.TextField label="Nama" isDisabled={isDisabled} readonly />
-          )}
+          {(field) => {
+            const userOptions = me
+              ? Array.isArray(me)
+                ? me.map((u) => ({ label: u.name, value: u.id })) // Jika 'me' berbentuk Array
+                : [{ label: me.name, value: me.id }] // Jika 'me' berbentuk Single Object
+              : [];
+
+            return <field.SelectField label="Nama" options={userOptions} />;
+          }}
         </form.AppField>
 
         <form.AppField name="amount">
           {(field) => (
-            <field.TextField
+            <field.InputField
               label="Nominal"
               isDisabled={isDisabled}
               type="number"
@@ -65,7 +75,7 @@ export default function SavingForm({
 
         <form.SubmitButton
           label="Saving"
-          className="w-full"
+          className="w-full mt-auto"
           loading={loading}
         />
       </form>
