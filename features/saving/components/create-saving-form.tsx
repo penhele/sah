@@ -22,7 +22,9 @@ export default function CreateSavingForm({ className }: Props) {
     gooeyToast.promise(mutateAsync(value), {
       loading: "Creating...",
       success: () => {
-        queryClient.invalidateQueries({ queryKey: savingsKeys.all });
+        queryClient.invalidateQueries({
+          queryKey: savingsKeys.mySavings(me?.id!),
+        });
         return "Berhasil";
       },
       error: "Gagal",

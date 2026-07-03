@@ -8,6 +8,7 @@ import {
 } from "../ui/input-group";
 import { Eye, EyeOff, LucideIcon, Mail } from "lucide-react";
 import { useState } from "react";
+import { formatNumber } from "@/lib/format/format-currency";
 
 type Props = {
   label: string;
@@ -30,7 +31,20 @@ export default function InputField({
 
   const [showPassword, setShowPassword] = useState(false);
 
-  console.log(field.state.value);
+  const rawValue = field.state.value;
+  const displayValue = type === "number" ? formatNumber(rawValue) : rawValue;
+
+  const getInputType = () => {
+    if (type === "password") {
+      return showPassword ? "text" : "password";
+    }
+    // PERBAIKAN: Jika tipenya number, gunakan "text" agar browser mau menampilkan titik (.) pemisah ribuan
+    if (type === "number") {
+      return "text";
+    }
+    return type;
+  };
+
   return (
     <Field>
       <FieldLabel>{label}</FieldLabel>
@@ -44,17 +58,16 @@ export default function InputField({
           </InputGroupAddon>
         )}
         <InputGroupInput
-          value={field.state.value}
+          value={displayValue || ""}
           onChange={(e) => {
             if (type === "number") {
-              const rawValue = e.target.value.replace(/\D/g, "");
-
-              field.handleChange(rawValue);
+              const cleanValue = e.target.value.replace(/\D/g, "");
+              field.handleChange(cleanValue);
             } else {
               field.handleChange(e.target.value);
             }
           }}
-          type={showPassword ? "text" : type}
+          type={getInputType()}
           placeholder={placeholder}
           readOnly={readonly}
           disabled={isDisabled}

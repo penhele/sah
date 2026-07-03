@@ -11,11 +11,11 @@ export default function CardChart() {
 
   const chartConfig = {
     Stephen: {
-      label: "Stephen",
+      label: "Stephen Helenus",
       color: "#2563eb", // Warna Biru
     },
     Ivana: {
-      label: "Ivana",
+      label: "Ivana Novelia",
       color: "#ec4899", // Warna Pink
     },
   } satisfies ChartConfig;
@@ -77,13 +77,13 @@ export default function CardChart() {
             />
 
             <Area
-              dataKey="Stephen"
+              dataKey="Stephen Helenus"
               type="monotone"
               fill="var(--color-Stephen)"
               stroke="var(--color-Stephen)"
             />
             <Area
-              dataKey="Ivana"
+              dataKey="Ivana Novelia"
               type="monotone"
               fill="var(--color-Ivana)"
               stroke="var(--color-Ivana)"
