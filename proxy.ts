@@ -22,16 +22,16 @@ export function proxy(request: NextRequest) {
   const token = request.cookies.get("access_token")?.value;
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/dashboard")) {
+  if (pathname.startsWith("/")) {
     if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    const role = getRoleFromToken(token);
+    // const role = getRoleFromToken(token);
 
-    if (!role || role.toLowerCase() !== "admin") {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+    // if (!role || role.toLowerCase() !== "admin") {
+    //   return NextResponse.redirect(new URL("/", request.url));
+    // }
   }
 
   return NextResponse.next();
