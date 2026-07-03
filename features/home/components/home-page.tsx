@@ -17,7 +17,12 @@ export default function HomePage() {
   const columnsForAll = getSavingColumns();
 
   return (
-    <div className=" space-y-4">
+    <div className="space-y-4">
+      <div className="flex flex-col">
+        <span className="text-sm text-muted-foreground">Selamat datang,</span>
+        <span className="font-bold text-lg">{me?.name}</span>
+      </div>
+
       <StatGrid />
 
       <div className="grid grid-cols-3 gap-4">

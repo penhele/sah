@@ -18,25 +18,25 @@ function getRoleFromToken(token: string) {
   }
 }
 
+const publicRoutes = ["/login"];
+
 export function proxy(request: NextRequest) {
   const token = request.cookies.get("access_token")?.value;
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/")) {
-    if (!token) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
+  const isPublicRoute = publicRoutes.includes(pathname);
 
-    // const role = getRoleFromToken(token);
+  if (!token && !isPublicRoute) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
-    // if (!role || role.toLowerCase() !== "admin") {
-    //   return NextResponse.redirect(new URL("/", request.url));
-    // }
+  if (token && isPublicRoute) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

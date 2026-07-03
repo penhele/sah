@@ -15,7 +15,7 @@ export const { useAppForm } = createFormHook({
   fieldComponents: {
     InputField,
     CalendarField,
-    SelectField
+    SelectField,
   },
   formComponents: {
     SubmitButton,

@@ -12,7 +12,7 @@ import { LoginPayload } from "../types/login-payload";
 export default function LoginForm() {
   const router = useRouter();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
   });
 
@@ -64,7 +64,11 @@ export default function LoginForm() {
           )}
         </form.AppField>
 
-        <form.SubmitButton label="Sign In" className="w-full" />
+        <form.SubmitButton
+          label="Sign In"
+          className="w-full"
+          loading={isPending}
+        />
       </form>
     </form.AppForm>
   );

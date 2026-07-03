@@ -45,7 +45,6 @@ export default function SavingForm({
         }}
         className={cn("space-y-4", className)}
       >
-
         <form.AppField name="userId">
           {(field) => {
             const userOptions = me
