@@ -15,13 +15,23 @@ export default function SavingPage() {
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Total Pemasukan {me?.name}</CardTitle>
-        </CardHeader>
+      <div className="grid gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>Ivana</CardTitle>
+          </CardHeader>
 
-        <CardContent></CardContent>
-      </Card>
+          <CardContent></CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Stephen</CardTitle>
+          </CardHeader>
+
+          <CardContent></CardContent>
+        </Card>
+      </div>
 
       <DataTable
         columns={columnsForAll}
