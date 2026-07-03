@@ -1,31 +1,19 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ROUTES } from "@/constants/routes";
 import { useAppForm } from "@/hooks/use-app-form";
 import { useMutation } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
 import { Lock, Mail } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { login } from "../api/login";
 import { LoginPayload } from "../types/login-payload";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
 
 export default function LoginForm() {
   const router = useRouter();
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
-    onMutate(variables, context) {
-      const toastId = toast.loading("Login...");
-      return { toastId };
-    },
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil", { id: onMutateResult.toastId });
-      router.push(ROUTES.HOME);
-    },
-    onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal", { id: onMutateResult?.toastId });
-    },
   });
 
   const form = useAppForm({
@@ -33,8 +21,15 @@ export default function LoginForm() {
       email: "",
       password: "",
     },
-    onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Log in...",
+        success: () => {
+          router.push(ROUTES.HOME);
+          return "Berhasil";
+        },
+        error: "Gagal",
+      });
     },
   });
 
