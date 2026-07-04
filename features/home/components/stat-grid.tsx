@@ -42,7 +42,7 @@ export default function StatGrid() {
     },
     {
       title: "Target Menabung",
-      value: `${savingProgress.toFixed(2)}`,
+      value: `${savingProgress.toFixed(2)} %`,
       description: `${formatter.format(total)} dari ${formatter.format(TARGET_SAVING)}`,
       Icon: Target,
       isProgress: true,

@@ -1,15 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Field, FieldLabel } from "@/components/ui/field";
 import { Progress } from "@/components/ui/progress";
-import { LucideIcon, Wallet } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import React from "react";
 
-type Props = {
+interface Props {
   title: string;
   value: number | string;
-  description: string;
+  description: React.ReactNode;
   isProgress?: boolean;
   Icon: LucideIcon;
-};
+}
 
 export default function StatCard({
   title,
@@ -31,16 +31,19 @@ export default function StatCard({
           </div>
         </div>
 
-        <div className="flex flex-col space-y-1">
-          <span className="text-2xl font-bold">
-            {value} {isProgress && "%"}
-          </span>
+        <div className="">
+          <span className="text-2xl font-bold">{value}</span>
 
-          {isProgress ? (
-            <Progress value={Number(value)} className="h-2 flex items-end" />
-          ) : (
-            <span className="text-muted-foreground">{description}</span>
-          )}
+          <div className="h-4 flex items-center">
+            {isProgress ? (
+              <Progress
+                value={Number(value.toString().split(" ")[0])}
+                className="h-2 flex items-end"
+              />
+            ) : (
+              <span className="text-muted-foreground">{description}</span>
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>
