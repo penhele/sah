@@ -2,6 +2,8 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  role: string;
+  total_amount: number;
   created_at: Date;
   updated_at: Date;
 }

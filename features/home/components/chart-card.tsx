@@ -52,7 +52,7 @@ export default function CardChart() {
   ); // Urutkan kronologis awal-akhir
 
   return (
-    <Card>
+    <Card className="col-span-2">
       <CardHeader>
         <CardTitle>Grafik</CardTitle>
       </CardHeader>

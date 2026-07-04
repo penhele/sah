@@ -7,6 +7,7 @@ import { useMe } from "@/features/user/hooks/use-me";
 import CardChart from "./chart-card";
 import { getSavingColumns } from "./saving-columns";
 import StatGrid from "./stat-grid";
+import PieChartSaving from "./pie-chart-saving";
 
 export default function HomePage() {
   const { data: me } = useMe();
@@ -20,7 +21,7 @@ export default function HomePage() {
     <div className="space-y-4">
       <div className="flex flex-col">
         <span className="text-sm text-muted-foreground">Selamat datang,</span>
-        <span className="font-bold text-lg">{me?.name}</span>
+        <span className="font-bold text-2xl">{me?.name}</span>
       </div>
 
       <StatGrid />
@@ -40,7 +41,11 @@ export default function HomePage() {
         />
       </div>
 
-      <CardChart />
+      <div className="grid grid-cols-3 gap-4">
+        <CardChart />
+
+        <PieChartSaving />
+      </div>
     </div>
   );
 }
